@@ -5,7 +5,9 @@ Want to count how much SNP each of your population have. You are in the right pl
 ## Input data
 You need a vcf.gz
 ## Requirements 
+
 You need to have bcftools installed on your computer. It has been tested on linux ubuntu 20.04 with bcftools Version: 1.10.2 (using htslib 1.10.2-3)
+
 ---
 
 ## How to run the shiny app
