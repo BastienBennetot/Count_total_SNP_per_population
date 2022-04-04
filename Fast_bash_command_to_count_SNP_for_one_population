@@ -1,8 +1,6 @@
 #!/bin/bash
 #This command helps you to count SNPs for a specific population from your whole vcf (containing samples from different population)
 # First we subset the vcf to individual from a specific population. Here this population file is called "population_file" (one sample name by line). The vcf file is called snp_file.vcf.gz here
-#Then we get the allele count for each site. If it is 0 it means than this ALT allele is missing in the subsetted vcf individuals
-#There can be several ALT allele, their count are separated by comma (ex: 0,0 or 0,1 or 0,1,0), so if we remove comma, sites that are fully reference (not a SNP within these individuals) will be as a sequence of zeros
-#We remove sequences of zeros (constant site equal to the reference), by taking merged (by removing commas) allele count higher than zero
+#Then using bcftools query snp_file.vcf.gz, we remove sites that are constant ref allele. Displaying the allele frequency also allows to remove fixed/constant site within the population. 
 #We count the number of lines left
-bcftools view -S population_file snp_file.vcf.gz|bcftools query -f '%AC\n'|sed 's/,//g' |awk '$1>=1'| wc -l
+bcftools view -S population_file snp_file.vcf.gz|bcftools query -f '%AF\n'  -i'GT="alt"'|awk '$1!=1'|wc -l
