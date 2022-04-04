@@ -45,8 +45,9 @@ server <- function(input, output, session) {
   #Once button pressed calculate the number of snp
   output$count <-eventReactive(input$go,{
     pop=paste(req(input$select_var),collapse = ",")#Collapse the sample list
-    system(paste0("bcftools view -s ",pop ," ",req(input$uploaded_file$datapath),"|bcftools query -f '%AC\n'|sed 's/,//g' |awk '$1>=1'| wc -l"),intern = T)
-  })
+    system(paste0("bcftools view -S ",pop ," ",req(input$uploaded_file$datapath),"|bcftools query -f '%AF\n'  -i'GT="alt"'|awk '$1!=1'| wc -l"),intern = T)
+  }) 
+
 }
 # Create Shiny app ----
 shinyApp(ui, server)
