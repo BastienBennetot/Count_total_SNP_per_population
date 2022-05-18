@@ -45,7 +45,7 @@ server <- function(input, output, session) {
   #Once button pressed calculate the number of snp
   output$count <-eventReactive(input$go,{
     pop=paste(req(input$select_var),collapse = ",")#Collapse the sample list
-    system(paste0("bcftools view -s ",pop ," ",req(input$uploaded_file$datapath),"|bcftools +fill-tags  -- -t AF |bcftools query -f '%AF\n'  -i'GT=\"alt\"'|grep "\."| wc -l"),intern = T)
+    system(paste0("bcftools view -s ",pop ," ",req(input$uploaded_file$datapath),"|bcftools +fill-tags  -- -t AF |bcftools query -f '%AF\n'  -i'GT=\"alt\"'|grep \"\\.\"| wc -l"),intern = T)
   }) 
 
 }
