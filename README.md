@@ -1,5 +1,5 @@
 # Count_total_SNP_per_population
-Want to count how much SNP each of your population have. You are in the right place
+Want to count how much single nucleotide polymorphism (SNP) each of your population have. You are in the right place. This Shiny app helps you to count SNP that are present in subset of a vcf file. Within the subset, if a site is not all reference allele, or all same-alternative allele then it is counted as a SNP. Please mind that if there is unknown genotype (. in the vcf) then it is counted as a SNP
 
 
 ## Input data
