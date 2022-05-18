@@ -3,4 +3,4 @@
 # First we subset the vcf to individual from a specific population. Here this population file is called "population_file" (one sample name by line). The vcf file is called snp_file.vcf.gz here
 #Then using bcftools query snp_file.vcf.gz, we remove sites that are constant ref allele. Displaying the allele frequency also allows to remove fixed/constant site within the population. 
 #We count the number of lines left
-bcftools view -S population_file snp_file.vcf.gz|bcftools query -f '%AF\n'  -i'GT="alt"'|awk '$1!=1'|wc -l
+bcftools view -S population_file snp_file.vcf.gz|bcftools +fill-tags  -- -t AF |bcftools query -f '%AF\n'  -i'GT="alt"'|grep  "\."|wc -l
